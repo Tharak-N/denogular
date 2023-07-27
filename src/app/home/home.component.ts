@@ -1,17 +1,16 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { DashboardComponent } from '../dashboard/dashboard.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  private router = inject(Router)
-  navigateToLogin(){
-    this.router.navigate(['/login'])
-  }
+  // private router = inject(Router)
+
 }

@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AuthService } from '../auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,35 +14,33 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 export class LoginComponent {
 
   private http = inject(HttpClient)
+  private router = inject(Router)
+  private authService = inject(AuthService);
+  private activeRoute = inject(ActivatedRoute);
 
   // constructor(private http: HttpClient){
 
   // }
 
-  ngOnInit(){
-    this.getLoginData()
-
-    this.http.get<any>(
-      'http://localhost:8800/about-me'
-    ).subscribe((resp: any) => {
-      console.log("resp is", resp)
-    },
-    // (error: any) => {
-    //   console.log(error)
-    // }
-    )
-
-  }
+  ngOnInit(){}
 
   getLoginData(){
-    this.http.post<any>(
-      'http://localhost:8800/login',
-      {
-        name: 'tharak',
-        from: 'Angular'
+    let credentials = {
+      name: 'tharak',
+      password: 1234
+    }
+
+    this.authService.login(credentials).subscribe(
+      (res: any) => {
+        if(res){
+          let returnUrl = this.activeRoute.snapshot.queryParamMap.get('returnUrl') ?? null
+          this.router.navigate([returnUrl ?? ''])
+        }
       }
     )
   }
+
+
 
 
 
