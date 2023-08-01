@@ -21,9 +21,6 @@ export class RequestInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log("intercepting")
-    console.log("the request url is", request)
-
     if(!this.isLoginInstance(request) && !!this.credentials.getToken() ){
       return next.handle(request.clone({
         setHeaders: {
@@ -31,7 +28,6 @@ export class RequestInterceptor implements HttpInterceptor {
         },
       }));
     }
-
     else {
       return next.handle(request)
     }
