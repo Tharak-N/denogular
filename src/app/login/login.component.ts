@@ -27,7 +27,8 @@ export class LoginComponent {
   getLoginData(){
     let credentials = {
       name: 'tharak',
-      password: 1234
+      // password: 1234,
+      age: 23
     }
 
     this.authService.login(credentials).subscribe(
@@ -44,4 +45,7 @@ export class LoginComponent {
 
 
 
+
 }
+
+

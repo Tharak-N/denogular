@@ -25,5 +25,20 @@ export class DashboardComponent {
     this.router.navigate(['/login'])
   }
 
+  ngOnInit(){
+    this.generateCryp().then((res: any) => console.log("Crypt res is", res))
+  }
+
+  async generateCryp(){
+    let crypt = await crypto.subtle.generateKey(
+      {
+        name: "AES-GCM",
+        length: 256,
+      },
+      true,
+      ['encrypt', 'decrypt']
+    )
+    return crypt
+  }
 
 }
