@@ -24,7 +24,7 @@ export class RequestInterceptor implements HttpInterceptor {
     if(!this.isLoginInstance(request) && !!this.credentials.getToken() ){
       return next.handle(request.clone({
         setHeaders: {
-          Authorization: `${ this.credentials.getToken() }`,
+          Authorization: `Bearer ${ this.credentials.getToken() }`,
         },
       }));
     }

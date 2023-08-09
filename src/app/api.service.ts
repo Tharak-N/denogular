@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 export class APIService {
 
   private readonly EndPoints = {
-    aboutme: () => `http://localhost:8800/about-me`
+    aboutme: () => `http://localhost:3400/about-me`
 
   }
 
